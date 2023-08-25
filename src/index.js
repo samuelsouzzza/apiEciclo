@@ -35,11 +35,34 @@ const users = [
   },
 ];
 // ----------------------------------------------
+function checkUser(req, res, next) {
+  if (
+    !req.body.name ||
+    !req.body.surname ||
+    !req.body.cpf ||
+    !req.body.email ||
+    !req.body.cell ||
+    !req.body.birth ||
+    !req.body.address.street ||
+    !req.body.address.cep ||
+    !req.body.address.neighborhood ||
+    !req.body.address.city ||
+    !req.body.address.state
+  ) {
+    res
+      .status(400)
+      .json(
+        'Algum(ns) campo(s) obrigatório(s) no cadastro do usuário está(am) vazio(s).'
+      );
+  }
+  return next();
+}
+// ----------------------------------------------
 app.get('/users', (req, res) => {
   return res.json(users);
 });
 // ----------------------------------------------
-app.post('/users', (req, res) => {
+app.post('/users', checkUser, (req, res) => {
   const {
     name,
     surname,
