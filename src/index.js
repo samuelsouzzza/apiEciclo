@@ -43,11 +43,10 @@ function checkUser(req, res, next) {
     !req.body.email ||
     !req.body.cell
   ) {
-    res
-      .status(400)
-      .json(
-        'Algum(ns) campo(s) obrigatório(s) no cadastro do usuário está(am) vazio(s).'
-      );
+    res.status(400).json({
+      message:
+        'Algum(ns) campo(s) obrigatório(s) no cadastro do usuário está(am) vazio(s).',
+    });
   }
   return next();
 }
@@ -68,10 +67,14 @@ app.post('/users', checkUser, (req, res) => {
     password,
   };
   users.push(newUser);
-  return res.json('Usuário criado com sucesso');
+  return res.json({ message: 'Usuário criado com sucesso' });
 });
 // ----------------------------------------------
 app.get('/users/:id', (req, res) => {
   return res.json(users[req.params.id]);
 });
 // ----------------------------------------------
+app.get('/users/delete/:id', (req, res) => {
+  users.splice(req.params.id, 1);
+  return res.json({ message: 'Usuário deletado com sucesso!' });
+});
