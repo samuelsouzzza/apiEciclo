@@ -45,7 +45,7 @@ function checkUser(req, res, next) {
   ) {
     res.status(400).json({
       message:
-        'Algum(ns) campo(s) obrigatório(s) no cadastro do usuário está(am) vazio(s).',
+        'Algum(ns) campo(s) obrigatório(s) no cadastro do usuário está(am) vazio(s)!',
     });
   }
   return next();
@@ -67,14 +67,26 @@ app.post('/users', checkUser, (req, res) => {
     password,
   };
   users.push(newUser);
-  return res.json({ message: 'Usuário criado com sucesso' });
+  return res.json({ message: 'Usuário criado com sucesso!' });
 });
 // ----------------------------------------------
 app.get('/users/:id', (req, res) => {
   return res.json(users[req.params.id]);
 });
 // ----------------------------------------------
-app.get('/users/delete/:id', (req, res) => {
+app.delete('/users/delete/:id', (req, res) => {
   users.splice(req.params.id, 1);
   return res.json({ message: 'Usuário deletado com sucesso!' });
+});
+// ----------------------------------------------
+app.put('./users/update/:id', checkUser, (req, res) => {
+  const { id } = req.params;
+  users[id].id = id;
+  users[id].name = req.body.name;
+  users[id].surname = req.body.surname;
+  users[id].cpf = req.body.cpf;
+  users[id].email = req.body.email;
+  users[id].cell = req.body.cell;
+  users[id].password = req.body.password;
+  return res.json({ message: 'Informações atualizadas com sucesso!' });
 });
