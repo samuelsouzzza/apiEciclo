@@ -56,7 +56,7 @@ app.get('/users', (req, res) => {
 });
 // ----------------------------------------------
 app.post('/users', checkUser, (req, res) => {
-  const { profile_photo, name, surname, cpf, email, cell, password } = req.body;
+  const { name, surname, cpf, email, cell, password } = req.body;
   const newUser = {
     id: users.length + 1,
     name,
@@ -65,7 +65,6 @@ app.post('/users', checkUser, (req, res) => {
     email,
     cell,
     password,
-    profile_photo,
   };
   users.push(newUser);
   return res.json({ status: 201, message: 'Usuário criado com sucesso!' });
