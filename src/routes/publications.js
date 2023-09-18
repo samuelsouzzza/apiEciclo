@@ -20,15 +20,17 @@ publicationsRoutes.get('/publications', (req, res) => {
   return res.json(publications);
 });
 // ----------------------------------------------
-publicationsRoutes.post('/publications', (req, res) => {
-  //TEM ALGUM ERRO NA CONVERSÃO NESTA LINHA:
-  //   const newPublication = req.body.publication;
-  const newPublication = {};
-  newPublication.id = publications.length + 1;
+publicationsRoutes.post(
+  '/publications',
+  uploadImgs.array('publication_photos', 5),
+  (req, res) => {
+    const newPublication = JSON.parse(req.body.publication);
 
-  publications.push(newPublication);
+    newPublication.id = publications.length + 1;
 
-  return res.json({ status: 201, message: 'Publicação criada com sucesso!' });
-});
+    publications.push(newPublication);
+    return res.json({ status: 201, message: 'Publicação criada com sucesso!' });
+  }
+);
 
 module.exports = publicationsRoutes;
