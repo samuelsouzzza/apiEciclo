@@ -33,7 +33,7 @@ publicationsRoutes.post(
     newPublication.status = 1;
 
     const dateNow = new Date();
-    newPublication.date_creation = `${dateNow
+    newPublication.opening_date = `${dateNow
       .getDate()
       .toString()
       .padStart(2, 0)}/${dateNow
@@ -44,7 +44,9 @@ publicationsRoutes.post(
         0
       )}/${dateNow.getFullYear()} - ${dateNow.getHours()}:${dateNow.getMinutes()}`;
 
-    const photoPaths = req.files.map((file) => file.path);
+    newPublication.closing_date = null;
+
+    const photoPaths = req.files.map((file) => file.path.replace(/\\/g, '/'));
     newPublication.photos_paths = photoPaths;
 
     publications.push(newPublication);
