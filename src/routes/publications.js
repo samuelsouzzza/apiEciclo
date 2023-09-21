@@ -32,17 +32,9 @@ publicationsRoutes.post(
     newPublication.id = publications.length + 1;
     newPublication.status = 1;
 
-    const dateNow = new Date();
-    newPublication.opening_date = `${dateNow
-      .getDate()
-      .toString()
-      .padStart(2, 0)}/${dateNow
-      .getMonth()
-      .toString()
-      .padStart(
-        2,
-        0
-      )}/${dateNow.getFullYear()} - ${dateNow.getHours()}:${dateNow.getMinutes()}`;
+    newPublication.opening_date = new Date().toLocaleString('pt-br', {
+      timeZoneName: 'short',
+    });
 
     newPublication.closing_date = null;
 
