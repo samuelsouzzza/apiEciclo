@@ -21,7 +21,9 @@ usersRoutes.post('/users', uploadProfiles.single('profilePic'), (req, res) => {
   const newUser = JSON.parse(req.body.user);
   newUser.id = users.length + 1;
 
-  const profilePicPath = req.file ? req.file.path.replace(/\\/g, '/') : null;
+  const profilePicPath = req.file
+    ? req.file.path.replace(/\\/g, '/').replaceAll(' ', '')
+    : null;
   newUser.profile_path = profilePicPath;
 
   users.push(newUser);

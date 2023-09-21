@@ -46,7 +46,9 @@ publicationsRoutes.post(
 
     newPublication.closing_date = null;
 
-    const photoPaths = req.files.map((file) => file.path.replace(/\\/g, '/'));
+    const photoPaths = req.files.map((file) =>
+      file.path.replace(/\\/g, '/').replaceAll(' ', '')
+    );
     newPublication.photos_paths = photoPaths;
 
     publications.push(newPublication);
