@@ -30,7 +30,10 @@ publicationsRoutes.post(
   (req, res) => {
     const newPublication = JSON.parse(req.body.publication);
     newPublication.id = publications.length + 1;
-    newPublication.status = 1;
+    newPublication.status = {
+      was_received: false,
+      was_delivered: false,
+    };
 
     newPublication.opening_date = new Date().toLocaleString('pt-br', {
       timeZoneName: 'short',
