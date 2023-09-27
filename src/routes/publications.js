@@ -35,10 +35,12 @@ publicationsRoutes.post(
       was_delivered: false,
     };
 
-    newPublication.opening_date = new Date().toLocaleString('pt-br', {
-      timeZoneName: 'short',
-    });
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = (now.getMonth() + 1).toString().padStart(2, '0');
+    const d = now.getDate().toString().padStart(2, '0');
 
+    newPublication.opening_date = `${y}-${m}-${d}`;
     newPublication.closing_date = null;
 
     const photoPaths = req.files.map((file) =>
