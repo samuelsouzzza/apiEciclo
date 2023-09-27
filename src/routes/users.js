@@ -25,6 +25,7 @@ usersRoutes.post('/users', uploadProfiles.single('profilePic'), (req, res) => {
     ? req.file.path.replace(/\\/g, '/').replaceAll(' ', '')
     : null;
   newUser.profile_path = profilePicPath;
+  newUser.access = 'default';
 
   users.push(newUser);
   return res.json({ status: 201, message: 'Usuário criado com sucesso!' });
