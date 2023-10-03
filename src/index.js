@@ -18,6 +18,11 @@ app.use(function (req, res, next) {
 });
 
 app.use('/uploads', express.static('uploads'));
+// app.use(
+//   '/uploads/publications/pub1/',
+//   express.static('uploads/publications/pub1/')
+// );
+
 app.use(express.json());
 app.use(usersRoutes);
 app.use(publicationsRoutes);
