@@ -1,28 +1,25 @@
 const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
+const extensionFix = require('../utils/extensionFix.js');
 
 const publications = [];
 
 const storagePublicationsImgs = multer.diskStorage({
   destination: (req, file, cb) => {
     const publicationId = publications.length + 1;
-
-    // Crie a pasta com base no ID da publicação
     const destinationPath = `uploads/publications/pub${publicationId}`;
 
     if (!fs.existsSync(destinationPath)) {
       fs.mkdirSync(destinationPath, { recursive: true });
     }
-
-    // Chame o callback com o caminho da pasta como o destino
     cb(null, destinationPath);
   },
   filename: async (req, file, cb) => {
     try {
-      const filename = `pub-${publications.length + 1}_${Date.now()}${
+      const filename = `pub_${publications.length + 1}${extensionFix(
         file.originalname
-      }`;
+      )}`;
       cb(null, filename);
     } catch (error) {
       cb(error);

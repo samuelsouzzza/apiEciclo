@@ -1,10 +1,12 @@
 const express = require('express');
 const multer = require('multer');
+const extensionFix = require('../utils/extensionFix');
 
 const storageUserProfiles = multer.diskStorage({
   destination: 'uploads/profiles',
-  filename: function (req, file, cb) {
-    cb(null, `user-${users.length + 1}_${Date.now()}${file.originalname}`);
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, `user_${users.length + 1}${extensionFix(file.originalname)}`);
   },
 });
 
