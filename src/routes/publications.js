@@ -17,7 +17,7 @@ const storagePublicationsImgs = multer.diskStorage({
   },
   filename: async (req, file, cb) => {
     try {
-      const filename = `pub_${publications.length + 1}${extensionFix(
+      const filename = `pub_${publications.length + 1}.${extensionFix(
         file.originalname
       )}`;
       cb(null, filename);

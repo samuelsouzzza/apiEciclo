@@ -6,7 +6,7 @@ const storageUserProfiles = multer.diskStorage({
   destination: 'uploads/profiles',
   filename: (req, file, cb) => {
     console.log(file);
-    cb(null, `user_${users.length + 1}${extensionFix(file.originalname)}`);
+    cb(null, `user_${users.length + 1}.${extensionFix(file.originalname)}`);
   },
 });
 
