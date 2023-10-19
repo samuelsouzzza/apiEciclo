@@ -5,9 +5,10 @@ const extensionFix = require('../utils/extensionFix.js');
 
 const publications = [];
 
+let publicationId = publications.length + 1;
+
 const storagePublicationsImgs = multer.diskStorage({
   destination: (req, file, cb) => {
-    const publicationId = publications.length + 1;
     const destinationPath = `uploads/publications/pub${publicationId}`;
 
     if (!fs.existsSync(destinationPath)) {
@@ -17,10 +18,11 @@ const storagePublicationsImgs = multer.diskStorage({
   },
   filename: async (req, file, cb) => {
     try {
-      const filename = `pub_${publications.length + 1}.${extensionFix(
+      const filename = `pub_${publicationId}.${extensionFix(
         file.originalname
       )}`;
       cb(null, filename);
+      publicationId++;
     } catch (error) {
       cb(error);
     }
