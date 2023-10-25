@@ -43,6 +43,7 @@ publicationsRoutes.post(
     const newPublication = JSON.parse(req.body.publication);
     newPublication.id = publications.length + 1;
     newPublication.status = {
+      opened: true,
       was_received: false,
       was_delivered: false,
     };
