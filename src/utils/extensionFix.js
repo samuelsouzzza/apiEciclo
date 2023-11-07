@@ -1,3 +1,3 @@
-module.exports = function extensionFix(name) {
+export default function extensionFix(name) {
   return name.split('.').reverse()[0];
-};
+}

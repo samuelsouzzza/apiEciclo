@@ -1,6 +1,7 @@
-const express = require('express');
-const multer = require('multer');
-const extensionFix = require('../utils/extensionFix');
+import express from 'express';
+import multer from 'multer';
+import extensionFix from '../utils/extensionFix.js';
+import User from '../models/users.js';
 
 const storageUserProfiles = multer.diskStorage({
   destination: 'uploads/profiles',
@@ -28,7 +29,8 @@ usersRoutes.post('/users', uploadProfiles.single('profilePic'), (req, res) => {
   newUser.profile_path = profilePicPath;
   newUser.access = 'default';
 
-  users.push(newUser);
+  // users.push(newUser);
+  User.create(newUser);
   return res.json({ status: 201, message: 'Usuário criado com sucesso!' });
 });
 // ----------------------------------------------
@@ -45,4 +47,5 @@ usersRoutes.put('./users/update/:id', (req, res) => {
   return res.json({ message: 'Informações atualizadas com sucesso!' });
 });
 
-module.exports = usersRoutes;
+// module.exports = usersRoutes;
+export default usersRoutes;

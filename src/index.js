@@ -1,11 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const usersRoutes = require('./routes/users.js');
-const publicationsRoutes = require('./routes/publications.js');
-const extensionFix = require('./utils/extensionFix.js');
+import express from 'express';
+import usersRoutes from './routes/users.js';
+import publicationsRoutes from './routes/publications.js';
+import connectDatabase from './database/db.js';
 
 const app = express();
 const PORT = 3000;
+const PORTDB = 8000;
 
 //CORS
 app.use(function (req, res, next) {
@@ -28,3 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Servidor aberto na porta ${PORT}`));
+
+connectDatabase()
+  .then(() => console.log('Conectado ao banco de dados'))
+  .catch((error) => console.log(error));

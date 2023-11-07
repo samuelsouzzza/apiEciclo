@@ -1,7 +1,7 @@
-const express = require('express');
-const multer = require('multer');
-const fs = require('fs');
-const extensionFix = require('../utils/extensionFix.js');
+import express from 'express';
+import multer from 'multer';
+import extensionFix from '../utils/extensionFix.js';
+// import User from '../models/users.js';
 
 const publications = [];
 
@@ -66,4 +66,5 @@ publicationsRoutes.post(
   }
 );
 
-module.exports = publicationsRoutes;
+// module.exports = publicationsRoutes;
+export default publicationsRoutes;
