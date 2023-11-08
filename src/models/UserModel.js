@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema(
     email: String,
     cell: String,
     password: String,
+    access: String,
+    profile_path: String,
     publication: [],
   },
   { collection: 'users' }

@@ -1,7 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import extensionFix from '../utils/extensionFix.js';
-import User from '../models/users.js';
+import User from '../models/UserModel.js';
 
 const storageUserProfiles = multer.diskStorage({
   destination: 'uploads/profiles',
@@ -21,7 +21,7 @@ usersRoutes.get('/users', (req, res) => {
 // ----------------------------------------------
 usersRoutes.post('/users', uploadProfiles.single('profilePic'), (req, res) => {
   const newUser = JSON.parse(req.body.user);
-  newUser.id = users.length + 1;
+  // newUser.id = users.length + 1;
 
   const profilePicPath = req.file
     ? req.file.path.replace(/\\/g, '/').replaceAll(' ', '')
