@@ -1,8 +1,21 @@
-import User from '../models/users.js';
+import { response } from 'express';
+import User from '../models/UserModel.js';
 
 async function getUsers(request, response) {
   const users = await User.find();
-  return response.status(200).json(users);
+  if (users) return response.status(200).json(users);
+
+  return response.status(404);
+}
+
+async function loginUser(req, res) {
+  const { email, password } = req.body;
+
+  const existsUser = await User.findOne({ email, password });
+  console.log('kjdjefwkj');
+  if (existsUser) return response.status(200).json(existsUser);
+
+  return response.status(400).send({ message: 'dh' });
 }
 
 async function createUser(request, response) {
@@ -20,4 +33,4 @@ async function deleteUser(request, response) {
   return response.status(200).json({ response: 'User deleted' });
 }
 
-export { getUsers, createUser, deleteUser };
+export { getUsers, loginUser, createUser, deleteUser };

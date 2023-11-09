@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   getUsers,
   createUser,
+  loginUser,
   deleteUser,
 } from './controllers/UserController.js';
 import {
@@ -16,6 +17,7 @@ import { createPonto, getPonto } from './controllers/PontoController.js';
 const routes = Router();
 
 routes.get('/users', getUsers);
+routes.post('/loginUser', loginUser);
 routes.post('/users', createUser);
 routes.delete('/users/:id', deleteUser);
 routes.post('/users/:idUser/publications/:pontoId', insertPublication);

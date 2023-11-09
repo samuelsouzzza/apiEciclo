@@ -1,13 +1,12 @@
 import express from 'express';
-import usersRoutes from './routes/users.js';
-import publicationsRoutes from './routes/publications.js';
 import connectDatabase from './database/db.js';
+import routes from './routes.js';
 
 const app = express();
 const PORT = 3000;
 const PORTDB = 8000;
 
-//CORS
+// CORS;
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -18,10 +17,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.set('json escape', true);
 app.use('/uploads', express.static('uploads'));
 app.use(express.json());
-app.use(usersRoutes);
-app.use(publicationsRoutes);
+app.use(routes);
 
 app.get('/', (req, res) => {
   res.send('API do projeto E-Ciclo');
