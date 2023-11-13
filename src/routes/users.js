@@ -47,9 +47,12 @@ usersRoutes.post('/userLogin', async (req, res) => {
 
   const userExists = await UserModel.findOne({ email, password });
 
-  if (userExists) return res.json(userExists);
+  if (userExists) return res.status(201).json(userExists);
 
-  return null;
+  return res.json({
+    status: 404,
+    message: 'Não foi possível acessar essa conta!',
+  });
 });
 // ----------------------------------------------
 usersRoutes.delete('/users/delete/:id', (req, res) => {
