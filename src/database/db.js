@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 async function connectDatabase() {
   await mongoose.connect(
-    'mongodb+srv://pedrocelestino01:rFYnsppetv6Chmnh@cluster0.w5s5i9i.mongodb.net/?retryWrites=true&w=majority'
+    'mongodb+srv://samuelsouzzza:AXWIaMABIckHlOwy@e-ciclo-db.uvcd4fw.mongodb.net/eciclo?retryWrites=true&w=majority&appName=E-Ciclo-DB'
   );
 }
 
