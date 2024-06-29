@@ -6,10 +6,7 @@ import UserModel from '../models/UserModel.js';
 const storageUserProfiles = multer.diskStorage({
   destination: 'uploads/profiles',
   filename: (req, file, cb) => {
-    cb(
-      null,
-      `user_${Math.round(Math.random())}.${extensionFix(file.originalname)}`
-    );
+    cb(null, `user_${Date.now()}.${extensionFix(file.originalname)}`);
   },
 });
 
