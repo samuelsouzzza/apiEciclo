@@ -62,11 +62,11 @@ publicationsRoutes.put(
       );
 
       return res
-        .status(204)
+        .status(200)
         .json({ status: 202, message: 'Publicação atualizada com sucesso!' });
     } catch {
       return res.json({
-        status: 404,
+        status: 505,
         message: 'Não foi possível atualizar a publicação pelo servidor!',
       });
     }
